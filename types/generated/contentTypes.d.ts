@@ -362,6 +362,34 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
+export interface ApiFoodFood extends Schema.CollectionType {
+  collectionName: 'foodlist';
+  info: {
+    singularName: 'food';
+    pluralName: 'foodlist';
+    displayName: 'Food';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String;
+    DateAdded: Attribute.Date;
+    food_category: Attribute.Relation<
+      'api::food.food',
+      'manyToOne',
+      'api::food-category.food-category'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::food.food', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::food.food', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 export interface ApiFoodCategoryFoodCategory extends Schema.CollectionType {
   collectionName: 'food_categories';
   info: {
@@ -376,6 +404,11 @@ export interface ApiFoodCategoryFoodCategory extends Schema.CollectionType {
     CategoryId: Attribute.String;
     Name: Attribute.String;
     MaxStayInFreezer: Attribute.Integer;
+    foods: Attribute.Relation<
+      'api::food-category.food-category',
+      'oneToMany',
+      'api::food.food'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -825,6 +858,7 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
+      'api::food.food': ApiFoodFood;
       'api::food-category.food-category': ApiFoodCategoryFoodCategory;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;

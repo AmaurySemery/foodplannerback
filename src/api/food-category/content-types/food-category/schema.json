@@ -19,6 +19,12 @@
     },
     "MaxStayInFreezer": {
       "type": "integer"
+    },
+    "foods": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::food.food",
+      "mappedBy": "food_category"
     }
   }
 }

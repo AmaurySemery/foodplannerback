@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "food_categories",
+  "info": {
+    "singularName": "food-category",
+    "pluralName": "food-categories",
+    "displayName": "FoodCategory"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "CategoryId": {
+      "type": "string"
+    },
+    "Name": {
+      "type": "string"
+    },
+    "MaxStayInFreezer": {
+      "type": "integer"
+    }
+  }
+}

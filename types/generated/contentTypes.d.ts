@@ -362,71 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiFoodFood extends Schema.CollectionType {
-  collectionName: 'foodlist';
-  info: {
-    singularName: 'food';
-    pluralName: 'foodlist';
-    displayName: 'Food';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Name: Attribute.String;
-    DateAdded: Attribute.Date;
-    food_category: Attribute.Relation<
-      'api::food.food',
-      'manyToOne',
-      'api::food-category.food-category'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::food.food', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::food.food', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
-export interface ApiFoodCategoryFoodCategory extends Schema.CollectionType {
-  collectionName: 'food_categories';
-  info: {
-    singularName: 'food-category';
-    pluralName: 'food-categories';
-    displayName: 'FoodCategory';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    CategoryId: Attribute.String;
-    Name: Attribute.String;
-    MaxStayInFreezer: Attribute.Integer;
-    foods: Attribute.Relation<
-      'api::food-category.food-category',
-      'oneToMany',
-      'api::food.food'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::food-category.food-category',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::food-category.food-category',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -848,6 +783,73 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiFoodFood extends Schema.CollectionType {
+  collectionName: 'foodlist';
+  info: {
+    singularName: 'food';
+    pluralName: 'foodlist';
+    displayName: 'Food';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String;
+    DateAdded: Attribute.Date;
+    food_category: Attribute.Relation<
+      'api::food.food',
+      'manyToOne',
+      'api::food-category.food-category'
+    >;
+    Email: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::food.food', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::food.food', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiFoodCategoryFoodCategory extends Schema.CollectionType {
+  collectionName: 'food_categories';
+  info: {
+    singularName: 'food-category';
+    pluralName: 'food-categories';
+    displayName: 'FoodCategory';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    CategoryId: Attribute.String;
+    Name: Attribute.String;
+    MaxStayInFreezer: Attribute.Integer;
+    foods: Attribute.Relation<
+      'api::food-category.food-category',
+      'oneToMany',
+      'api::food.food'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::food-category.food-category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::food-category.food-category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -858,8 +860,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::food.food': ApiFoodFood;
-      'api::food-category.food-category': ApiFoodCategoryFoodCategory;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -868,6 +868,8 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::food.food': ApiFoodFood;
+      'api::food-category.food-category': ApiFoodCategoryFoodCategory;
     }
   }
 }

@@ -797,7 +797,7 @@ export interface ApiFoodFood extends Schema.CollectionType {
   attributes: {
     Name: Attribute.String;
     DateAdded: Attribute.Date;
-    food_category: Attribute.Relation<
+    foodcategory: Attribute.Relation<
       'api::food.food',
       'manyToOne',
       'api::food-category.food-category'

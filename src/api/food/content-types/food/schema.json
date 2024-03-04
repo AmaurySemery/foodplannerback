@@ -18,7 +18,7 @@
     "DateAdded": {
       "type": "date"
     },
-    "food_category": {
+    "foodcategory": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::food-category.food-category",
